@@ -161,20 +161,23 @@ console.log(arrNumber)
 //================================================================================================
 
 let students = [
-    {id: 1, name: "Вася", spec: "Инженер"}, 
-    {id: 2, name: "Петя", spec: "Инженер"}, 
-    {id: 3, name: "Петя", spec: "Инженер"}
+    {id: 1, name: "Вася", surname: "Иванов", spec: "Инженер", age: 18}, 
+    {id: 2, name: "Петя", surname: "Тузов", spec: "Инженер", age: 21}, 
+    {id: 3, name: "Петя", surname: "Соболев", spec: "Инженер", age: 19}
 ]
 
-function changeSpec(id, spec) {
+function updateStudent(id, name, surname, spec, age) {
     students.forEach(function(item) {
         if (item.id === id) {
+            item.name = name
+            item.surname = surname
             item.spec = spec
+            item.age = age
         }
     });
 }
 
-function addStudent(name, spec) {
+function addStudent(name, surname, spec, age) {
     let maxId = students[0].id;
 
     for(let i = 0; i < students.length; i++){
@@ -184,33 +187,44 @@ function addStudent(name, spec) {
     }
 
     students.push(
-        {id: maxId + 1, name: name, spec: spec}, 
+        {id: maxId + 1, name: name, surname: surname, spec: spec, age: age}, 
     )
 }
 
 function outputArray() {
     for (let item of students) {
-        console.log(`${item.name}-${item.spec}`)
+        console.log(`${item.id}-${item.name}-${item.surname}-${item.spec}-${item.age}`)
     }
 }
 
-changeSpec(1, 'Программист')
+function deleteStudent(id) {
+    students.forEach(function(item) {
+        if (item.id === id) {
+            students = students.filter(function(f) { return f !== item })
+        }
+    });
+}
 
-changeSpec(2, 'Физик')
 
 console.log(students)
 
 outputArray()
 
-addStudent('Дима', 'Химик')
+addStudent('Дима', 'Смирнов', 'Химик', 20)
+
+updateStudent(3, 'Дима', 'Самойлов', 'Биолог', 19)
 
 console.log(students)
 
 outputArray()
 
-addStudent('Вася','Программист')
+addStudent('Вася', 'Петров', 'Программист', 19)
 
-changeSpec(5, 'Физик')
+console.log(students)
+
+outputArray()
+
+deleteStudent(3)
 
 console.log(students)
 
