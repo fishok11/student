@@ -160,24 +160,21 @@ console.log(arrNumber)
 
 //================================================================================================
 
-let students = [
-    {id: 1, name: "Вася", surname: "Иванов", spec: "Инженер", age: 18}, 
-    {id: 2, name: "Петя", surname: "Тузов", spec: "Инженер", age: 21}, 
-    {id: 3, name: "Петя", surname: "Соболев", spec: "Инженер", age: 19}
-]
-
-function updateStudent(id, name, surname, spec, age) {
-    students.forEach(function(item) {
-        if (item.id === id) {
-            item.name = name
-            item.surname = surname
-            item.spec = spec
-            item.age = age
-        }
-    });
+const Specs = {
+    "22.01": "Инженер",
+    "23.15": "Программист",
+    "23.15": "Химик",
+    "40.21": "Биолог",
 }
 
-function addStudent(name, surname, spec, age) {
+let students = [
+    {id: 1, name: "Вася", surname: "Иванов", spec: "22.01", age: 18}, 
+    {id: 2, name: "Петя", surname: "Тузов", spec: "22.01", age: 21}, 
+    {id: 3, name: "Петя", surname: "Соболев", spec: "22.01", age: 19}
+]
+
+
+function addStudent(student) {
     let maxId = students[0].id;
 
     for(let i = 0; i < students.length; i++){
@@ -187,9 +184,37 @@ function addStudent(name, surname, spec, age) {
     }
 
     students.push(
-        {id: maxId + 1, name: name, surname: surname, spec: spec, age: age}, 
+        {
+            id: maxId + 1,
+            name: student.name,
+            surname: student.surname,
+            spec: student.spec,
+            age: student.age,
+        }
     )
 }
+
+function updateStudent(id, student) {
+    students.forEach(function(item) {
+        if (item.id === id) {
+            student.name && (item.name = student.name);
+            if (student.surname) {
+                item.surname = student.surname
+            }
+            if (student.spec) {
+                item.spec = student.spec
+            }
+            if (student.age) {
+                item.age = student.age
+            }
+        }
+    });
+}
+
+function deleteStudent(id) {
+    students = students.filter(function(student) { return student.id !== id })
+}
+
 
 function outputArray() {
     for (let item of students) {
@@ -197,28 +222,19 @@ function outputArray() {
     }
 }
 
-function deleteStudent(id) {
-    students.forEach(function(item) {
-        if (item.id === id) {
-            students = students.filter(function(f) { return f !== item })
-        }
-    });
-}
+console.log(students)
 
+outputArray()
+
+addStudent({name: 'Дима', surname: 'Смирнов', spec: "23.15", age: 20})
+
+updateStudent(3, {spec: "40.21", age: 21})
 
 console.log(students)
 
 outputArray()
 
-addStudent('Дима', 'Смирнов', 'Химик', 20)
-
-updateStudent(3, 'Дима', 'Самойлов', 'Биолог', 19)
-
-console.log(students)
-
-outputArray()
-
-addStudent('Вася', 'Петров', 'Программист', 19)
+addStudent({name: 'Вася', surname: 'Петров', spec: "23.15", age: 19})
 
 console.log(students)
 
