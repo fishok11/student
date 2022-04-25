@@ -186,29 +186,21 @@ function addStudent(student) {
     students.push(
         {
             id: maxId + 1,
-            name: student.name,
-            surname: student.surname,
-            spec: student.spec,
-            age: student.age,
+            ...student,
         }
     )
 }
 
 function updateStudent(id, student) {
-    students.forEach(function(item) {
+    for (let i = 0; i < students.length; i++) {
+        const item = students[i];
         if (item.id === id) {
-            student.name && (item.name = student.name);
-            if (student.surname) {
-                item.surname = student.surname
-            }
-            if (student.spec) {
-                item.spec = student.spec
-            }
-            if (student.age) {
-                item.age = student.age
+            students[i] = {
+                ...item,
+                ...student,
             }
         }
-    });
+    }
 }
 
 function deleteStudent(id) {
