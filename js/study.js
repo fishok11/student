@@ -163,14 +163,14 @@ console.log(arrNumber)
 const Specs = {
     "22.01": "Инженер",
     "23.15": "Программист",
-    "23.15": "Химик",
+    "25.15": "Химик",
     "40.21": "Биолог",
 }
 
 let students = [
-    {id: 1, name: "Вася", surname: "Иванов", spec: "22.01", age: 18}, 
-    {id: 2, name: "Петя", surname: "Тузов", spec: "22.01", age: 21}, 
-    {id: 3, name: "Петя", surname: "Соболев", spec: "22.01", age: 19}
+    {id: 1, name: "Вася", surname: "Иванов", spec: Specs["22.01"], age: 18}, 
+    {id: 2, name: "Петя", surname: "Тузов", spec: Specs["22.01"], age: 21}, 
+    {id: 3, name: "Петя", surname: "Соболев", spec: Specs["22.01"], age: 19},
 ]
 
 
@@ -192,8 +192,10 @@ function addStudent(student) {
 }
 
 function updateStudent(id, student) {
+    
     for (let i = 0; i < students.length; i++) {
         const item = students[i];
+
         if (item.id === id) {
             students[i] = {
                 ...item,
@@ -218,15 +220,15 @@ console.log(students)
 
 outputArray()
 
-addStudent({name: 'Дима', surname: 'Смирнов', spec: "23.15", age: 20})
+addStudent({name: 'Дима', surname: 'Смирнов', spec: Specs["23.15"], age: 20})
 
-updateStudent(3, {spec: "40.21", age: 21})
+updateStudent(3, {spec: Specs["40.21"], age: 21})
 
 console.log(students)
 
 outputArray()
 
-addStudent({name: 'Вася', surname: 'Петров', spec: "23.15", age: 19})
+addStudent({name: 'Вася', surname: 'Петров', spec: Specs["23.15"], age: 19})
 
 console.log(students)
 
