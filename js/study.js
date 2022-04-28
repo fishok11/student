@@ -168,9 +168,9 @@ const Specs = {
 }
 
 let students = [
-    {id: 1, name: "Вася", surname: "Иванов", spec: Specs["22.01"], age: 18}, 
-    {id: 2, name: "Петя", surname: "Тузов", spec: Specs["22.01"], age: 21}, 
-    {id: 3, name: "Петя", surname: "Соболев", spec: Specs["22.01"], age: 19},
+    {id: 1, name: "Вася", surname: "Иванов", speciality: Specs["22.01"], age: 18}, 
+    {id: 2, name: "Петя", surname: "Тузов", speciality: Specs["22.01"], age: 21}, 
+    {id: 3, name: "Петя", surname: "Соболев", speciality: Specs["22.01"], age: 19},
 ]
 
 
@@ -212,7 +212,7 @@ function deleteStudent(id) {
 
 function outputArray() {
     for (let item of students) {
-        console.log(`${item.id}-${item.name}-${item.surname}-${item.spec}-${item.age}`)
+        console.log(`${item.id}-${item.name}-${item.surname}-${item.speciality}-${item.age}`)
     }
 }
 
@@ -220,7 +220,7 @@ console.log(students)
 
 outputArray()
 
-addStudent({name: 'Дима', surname: 'Смирнов', spec: Specs["23.15"], age: 20})
+addStudent({name: 'Дима', surname: 'Смирнов', speciality: Specs["23.15"], age: 20})
 
 updateStudent(3, {spec: Specs["40.21"], age: 21})
 
@@ -228,7 +228,7 @@ console.log(students)
 
 outputArray()
 
-addStudent({name: 'Вася', surname: 'Петров', spec: Specs["23.15"], age: 19})
+addStudent({name: 'Саша', surname: 'Петров', speciality: Specs["23.15"], age: 19})
 
 console.log(students)
 
@@ -239,3 +239,37 @@ deleteStudent(3)
 console.log(students)
 
 outputArray()
+
+
+let thead = document.querySelector(".student-head");
+
+let student = students[0]
+
+let tr = document.createElement('tr'); 
+
+    for (let key in student) {
+        let th = document.createElement('th');
+
+        th.innerHTML = key
+            
+        tr.append(th); 
+    }
+
+thead.append(tr); 
+
+
+let tbody = document.querySelector(".student-body");
+
+for (let student of students) {
+	let tr = document.createElement('tr'); 
+	
+        for (let column in student) {
+            let td = document.createElement('td');
+
+            td.innerHTML = student[column]
+            
+            tr.append(td); 
+        }
+	
+	tbody.append(tr); 
+}

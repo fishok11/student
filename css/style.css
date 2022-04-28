@@ -1,0 +1,40 @@
+ol, ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+p {
+    margin: 0;
+}
+h1, h2, h3 {
+    margin: 0;
+}
+h1 {
+    font-size: 24px;
+}
+body {
+    margin: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+input, button, body {
+    font-family: 'Ubuntu', sans-serif;
+}
+td{
+    text-align: center;
+}
+
+
+.student {
+    width: 100%;
+    height: auto; 
+    border: 1px solid rgb(123, 208, 230);
+    margin: 5px;
+}
+.student-head{
+    background-color: rgb(183, 250, 230);
+}
+.student-body{
+    background-color: rgb(196, 233, 255);
+}
