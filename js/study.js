@@ -160,6 +160,10 @@ console.log(arrNumber)
 
 //================================================================================================
 
+
+
+// ********************* database.js *********************
+
 const Specs = {
     "22.01": "Инженер",
     "23.15": "Программист",
@@ -174,47 +178,28 @@ let students = [
 ]
 
 
-function addStudent(student) {
-    let maxId = students[0].id;
 
-    for(let i = 0; i < students.length; i++){
-        if (maxId < students[i].id) {
-          maxId = students[i].id 
-        }
-    }
-
-    students.push(
-        {
-            id: maxId + 1,
-            ...student,
-        }
-    )
-}
-
-function updateStudent(id, student) {
-    
-    for (let i = 0; i < students.length; i++) {
-        const item = students[i];
-
-        if (item.id === id) {
-            students[i] = {
-                ...item,
-                ...student,
-            }
-        }
-    }
-}
-
-function deleteStudent(id) {
-    students = students.filter(function(student) { return student.id !== id })
-}
+// ********************* main.js *********************
 
 
-function outputArray() {
-    for (let item of students) {
-        console.log(`${item.id}-${item.name}-${item.surname}-${item.speciality}-${item.age}`)
-    }
-}
+// задание
+
+// В новом учебном году название специальности 22.01 меняется с Инженер на Инженер-системотехник.
+
+// Перед началом первого семестра пришла секретарша и поменяла название специальности в базе данных:
+Specs["22.01"] = "Инженер-системотехник";
+
+// Нужно, чтобы во всех отчетах ниже название специальности поменялось тоже.
+
+// Подсказка: мы неправильно храним специальности в базе данных студентов (students) - мы почему-то по прежнему храним название специальности,
+// а надо хранить ее код - в этом смысл мапов. Код специальности (key) никогда не меняется. Название (value) - меняется как угодно.
+
+// /задание
+
+
+
+
+
 
 console.log(students)
 
@@ -272,4 +257,53 @@ for (let student of students) {
         }
 	
 	tbody.append(tr); 
+}
+
+
+
+// ********************* api.js *********************
+
+function addStudent(student) {
+    let maxId = students[0].id;
+
+    for(let i = 0; i < students.length; i++){
+        if (maxId < students[i].id) {
+          maxId = students[i].id 
+        }
+    }
+
+    students.push(
+        {
+            id: maxId + 1,
+            ...student,
+        }
+    )
+}
+
+function updateStudent(id, student) {
+    
+    for (let i = 0; i < students.length; i++) {
+        const item = students[i];
+
+        if (item.id === id) {
+            students[i] = {
+                ...item,
+                ...student,
+            }
+        }
+    }
+}
+
+function deleteStudent(id) {
+    students = students.filter(function(student) { return student.id !== id })
+}
+
+
+// ********************* utils.js *********************
+
+function outputArray() {
+    console.log("--- список студентов ---")
+    for (let item of students) {
+        console.log(`${item.id}-${item.name}-${item.surname}-${item.speciality}-${item.age}`)
+    }
 }
