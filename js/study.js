@@ -172,9 +172,9 @@ const Specs = {
 }
 
 let students = [
-    {id: 1, name: "Вася", surname: "Иванов", speciality: Specs["22.01"], age: 18}, 
-    {id: 2, name: "Петя", surname: "Тузов", speciality: Specs["22.01"], age: 21}, 
-    {id: 3, name: "Петя", surname: "Соболев", speciality: Specs["22.01"], age: 19},
+    {id: 1, name: "Вася", surname: "Иванов", speciality: "22.01", age: 18}, 
+    {id: 2, name: "Петя", surname: "Тузов", speciality: "22.01", age: 21}, 
+    {id: 3, name: "Петя", surname: "Соболев", speciality: "22.01", age: 19},
 ]
 
 
@@ -186,8 +186,15 @@ let students = [
 
 // В новом учебном году название специальности 22.01 меняется с Инженер на Инженер-системотехник.
 
+console.log("------------------ 2021 ---------------------");
+outputArray()
+
 // Перед началом первого семестра пришла секретарша и поменяла название специальности в базе данных:
 Specs["22.01"] = "Инженер-системотехник";
+
+
+console.log("------------------ 2022 ---------------------");
+outputArray()
 
 // Нужно, чтобы во всех отчетах ниже название специальности поменялось тоже.
 
@@ -205,15 +212,15 @@ console.log(students)
 
 outputArray()
 
-addStudent({name: 'Дима', surname: 'Смирнов', speciality: Specs["23.15"], age: 20})
+addStudent({name: 'Дима', surname: 'Смирнов', speciality: "23.15", age: 20})
 
-updateStudent(3, {spec: Specs["40.21"], age: 21})
+updateStudent(3, {speciality: "40.21", age: 21})
 
 console.log(students)
 
 outputArray()
 
-addStudent({name: 'Саша', surname: 'Петров', speciality: Specs["23.15"], age: 19})
+addStudent({name: 'Саша', surname: 'Петров', speciality: "23.15", age: 19})
 
 console.log(students)
 
@@ -304,6 +311,6 @@ function deleteStudent(id) {
 function outputArray() {
     console.log("--- список студентов ---")
     for (let item of students) {
-        console.log(`${item.id}-${item.name}-${item.surname}-${item.speciality}-${item.age}`)
+        console.log(`${item.id}-${item.name}-${item.surname}-${Specs[item.speciality]}-${item.age}`)
     }
 }
