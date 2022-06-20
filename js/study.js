@@ -182,32 +182,6 @@ let students = [
 // ********************* main.js *********************
 
 
-// задание
-
-// В новом учебном году название специальности 22.01 меняется с Инженер на Инженер-системотехник.
-
-console.log("------------------ 2021 ---------------------");
-outputArray()
-
-// Перед началом первого семестра пришла секретарша и поменяла название специальности в базе данных:
-Specs["22.01"] = "Инженер-системотехник";
-
-
-console.log("------------------ 2022 ---------------------");
-outputArray()
-
-// Нужно, чтобы во всех отчетах ниже название специальности поменялось тоже.
-
-// Подсказка: мы неправильно храним специальности в базе данных студентов (students) - мы почему-то по прежнему храним название специальности,
-// а надо хранить ее код - в этом смысл мапов. Код специальности (key) никогда не меняется. Название (value) - меняется как угодно.
-
-// /задание
-
-
-
-
-
-
 console.log(students)
 
 outputArray()
@@ -270,6 +244,7 @@ for (let student of students) {
 
 // ********************* api.js *********************
 
+
 function addStudent(student) {
     let maxId = students[0].id;
 
@@ -303,14 +278,4 @@ function updateStudent(id, student) {
 
 function deleteStudent(id) {
     students = students.filter(function(student) { return student.id !== id })
-}
-
-
-// ********************* utils.js *********************
-
-function outputArray() {
-    console.log("--- список студентов ---")
-    for (let item of students) {
-        console.log(`${item.id}-${item.name}-${item.surname}-${Specs[item.speciality]}-${item.age}`)
-    }
 }
