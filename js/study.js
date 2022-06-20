@@ -202,64 +202,38 @@ console.log(students);
 
 
 
+let thead = document.querySelector(".student-head");
 
-// console.log(students)
+let student = students[0]
 
-// outputArray()
+let tr = document.createElement('tr'); 
 
-// addStudent({name: 'Дима', surname: 'Смирнов', speciality: "23.15", age: 20})
+    for (let key in student) {
+        let th = document.createElement('th');
 
-// updateStudent(3, {speciality: "40.21", age: 21})
-
-// console.log(students)
-
-// outputArray()
-
-// addStudent({name: 'Саша', surname: 'Петров', speciality: "23.15", age: 19})
-
-// console.log(students)
-
-// outputArray()
-
-// deleteStudent(3)
-
-// console.log(students)
-
-// outputArray()
-
-
-// let thead = document.querySelector(".student-head");
-
-// let student = students[0]
-
-// let tr = document.createElement('tr'); 
-
-//     for (let key in student) {
-//         let th = document.createElement('th');
-
-//         th.innerHTML = key
+        th.innerHTML = key
             
-//         tr.append(th); 
-//     }
+        tr.append(th); 
+    }
 
-// thead.append(tr); 
+thead.append(tr); 
 
 
-// let tbody = document.querySelector(".student-body");
+let tbody = document.querySelector(".student-body");
 
-// for (let student of students) {
-// 	let tr = document.createElement('tr'); 
+for (let student of students) {
+	let tr = document.createElement('tr'); 
 	
-//         for (let column in student) {
-//             let td = document.createElement('td');
+        for (let column in student) {
+            let td = document.createElement('td');
 
-//             td.innerHTML = student[column]
+            td.innerHTML = student[column]
             
-//             tr.append(td); 
-//         }
+            tr.append(td); 
+        }
 	
-// 	tbody.append(tr); 
-// }
+	tbody.append(tr); 
+}
 
 
 
