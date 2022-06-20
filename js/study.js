@@ -194,7 +194,14 @@ console.log(students[0]);
 
 console.log(students);
 
+/// задание.
+/// вместо физического удаления студента (deleteStudent(1, students);) сделать у студента признак available (активный, учится) - boolean (true/false).
+/// принимаем студента (new) - он сразу учится (available=true). Когда студента отчисляют - available=false
+/// написать метод отчисления студента Student.expel() - применять students[1].expel()
+/// и еще один метод Student.isAvailable(), который будет возвращать true если студент учится (не отчислен)
+/// при выводе таблички не показывать отчисленных студентов, используя метод isAvailable()
 
+/// это заменить на students[1].expel()
 deleteStudent(1, students);
 
 console.log(students);
