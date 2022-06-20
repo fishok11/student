@@ -171,111 +171,100 @@ const Specs = {
     "40.21": "Биолог",
 }
 
-let students = [
-    {id: 1, name: "Вася", surname: "Иванов", speciality: "22.01", age: 18}, 
-    {id: 2, name: "Петя", surname: "Тузов", speciality: "22.01", age: 21}, 
-    {id: 3, name: "Петя", surname: "Соболев", speciality: "22.01", age: 19},
-]
 
 
 
 // ********************* main.js *********************
 
+let students = [];
 
-console.log(students)
+students.push(
+    new Student({name: "Вася", surname: "Иванов", speciality: "22.01", age: 18})
+);
+students.push(
+    new Student({name: "Петя", surname: "Тузов", speciality: "22.01", age: 21})
+);
+students.push(
+    new Student({name: "Петя", surname: "Соболев", speciality: "22.01", age: 19})
+);
 
-outputArray()
+console.log(students[0]);
+students[0].update({age: 21})
+console.log(students[0]);
 
-addStudent({name: 'Дима', surname: 'Смирнов', speciality: "23.15", age: 20})
-
-updateStudent(3, {speciality: "40.21", age: 21})
-
-console.log(students)
-
-outputArray()
-
-addStudent({name: 'Саша', surname: 'Петров', speciality: "23.15", age: 19})
-
-console.log(students)
-
-outputArray()
-
-deleteStudent(3)
-
-console.log(students)
-
-outputArray()
+console.log(students);
 
 
-let thead = document.querySelector(".student-head");
+deleteStudent(1, students);
 
-let student = students[0]
+console.log(students);
 
-let tr = document.createElement('tr'); 
 
-    for (let key in student) {
-        let th = document.createElement('th');
 
-        th.innerHTML = key
+
+
+// console.log(students)
+
+// outputArray()
+
+// addStudent({name: 'Дима', surname: 'Смирнов', speciality: "23.15", age: 20})
+
+// updateStudent(3, {speciality: "40.21", age: 21})
+
+// console.log(students)
+
+// outputArray()
+
+// addStudent({name: 'Саша', surname: 'Петров', speciality: "23.15", age: 19})
+
+// console.log(students)
+
+// outputArray()
+
+// deleteStudent(3)
+
+// console.log(students)
+
+// outputArray()
+
+
+// let thead = document.querySelector(".student-head");
+
+// let student = students[0]
+
+// let tr = document.createElement('tr'); 
+
+//     for (let key in student) {
+//         let th = document.createElement('th');
+
+//         th.innerHTML = key
             
-        tr.append(th); 
-    }
+//         tr.append(th); 
+//     }
 
-thead.append(tr); 
+// thead.append(tr); 
 
 
-let tbody = document.querySelector(".student-body");
+// let tbody = document.querySelector(".student-body");
 
-for (let student of students) {
-	let tr = document.createElement('tr'); 
+// for (let student of students) {
+// 	let tr = document.createElement('tr'); 
 	
-        for (let column in student) {
-            let td = document.createElement('td');
+//         for (let column in student) {
+//             let td = document.createElement('td');
 
-            td.innerHTML = student[column]
+//             td.innerHTML = student[column]
             
-            tr.append(td); 
-        }
+//             tr.append(td); 
+//         }
 	
-	tbody.append(tr); 
-}
+// 	tbody.append(tr); 
+// }
 
 
 
 // ********************* api.js *********************
 
-
-function addStudent(student) {
-    let maxId = students[0].id;
-
-    for(let i = 0; i < students.length; i++){
-        if (maxId < students[i].id) {
-          maxId = students[i].id 
-        }
-    }
-
-    students.push(
-        {
-            id: maxId + 1,
-            ...student,
-        }
-    )
-}
-
-function updateStudent(id, student) {
-    
-    for (let i = 0; i < students.length; i++) {
-        const item = students[i];
-
-        if (item.id === id) {
-            students[i] = {
-                ...item,
-                ...student,
-            }
-        }
-    }
-}
-
-function deleteStudent(id) {
-    students = students.filter(function(student) { return student.id !== id })
+function deleteStudent(index, students) {
+    students.splice(index, 1);
 }

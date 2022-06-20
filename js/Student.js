@@ -9,16 +9,16 @@ class Student {
   constructor(student) {
     this.id = generateUUID();
 
-    this.name = student.year;
+    this.name = student.name;
     this.surname = student.surname;
     this.speciality = student.speciality;
     this.age = student.age;
-
   }
 
-  update() {
-  }
-
-  delete() {
+  update(studentUpdate) {
+    this.name = studentUpdate.name ?? this.name;
+    this.surname = studentUpdate.surname ?? this.surname;
+    this.speciality = studentUpdate.speciality ?? this.speciality;
+    this.age = studentUpdate.age ?? this.age;
   }
 }
