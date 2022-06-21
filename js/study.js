@@ -168,45 +168,48 @@ const Specs = {
     "22.01": "Инженер",
     "23.15": "Программист",
     "25.15": "Химик",
-    "40.21": "Биолог",
+    "23.15": "Биолог",
 }
 
-let students = [
-    {id: 1, name: "Вася", surname: "Иванов", speciality: "22.01", age: 18}, 
-    {id: 2, name: "Петя", surname: "Тузов", speciality: "22.01", age: 21}, 
-    {id: 3, name: "Петя", surname: "Соболев", speciality: "22.01", age: 19},
-]
+
 
 
 // ********************* main.js *********************
 
+let students = [];
 
-Specs["22.01"] = "Инженер-системотехник";
+students.push(
+    new Student({name: "Вася", surname: "Иванов", speciality: "22.01", age: 18})
+);
+students.push(
+    new Student({name: "Петя", surname: "Тузов", speciality: "23.15", age: 22})
+);
+students.push(
+    new Student({name: "Петя", surname: "Соболев", speciality: "22.01", age: 20})
+);
+students.push(
+    new Student({name: "Дима", surname: "Тугушев", speciality: "23.15", age: 19})
+);
+students.push(
+    new Student({name: "Сева", surname: "Ладыгин", speciality: "25.15", age: 18})
+);
 
-console.log(students)
+console.log(students[0]);
+students[0].update({age: 21})
+console.log(students[0]);
 
-outputArray()
 
-addStudent({name: 'Дима', surname: 'Смирнов', speciality: "23.15", age: 20})
+/// задание.
+/// вместо физического удаления студента (deleteStudent(1, students);) сделать у студента признак available (активный, учится) - boolean (true/false).
+/// принимаем студента (new) - он сразу учится (available=true). Когда студента отчисляют - available=false
+/// написать метод отчисления студента Student.expel() - применять students[1].expel()
+/// и еще один метод Student.isAvailable(), который будет возвращать true если студент учится (не отчислен)
+/// при выводе таблички не показывать отчисленных студентов, используя метод isAvailable()
 
-updateStudent(3, {speciality: "40.21", age: 21})
-
-console.log(students)
-
-outputArray()
-
-addStudent({name: 'Саша', surname: 'Петров', speciality: "23.15", age: 19})
-
-console.log(students)
-
-outputArray()
-
-deleteStudent(3)
-
-console.log(students)
-
-outputArray()
-
+/// это заменить на students[1].expel()
+students[1].expel()
+console.log(students);
+console.log(students[1].isAvailable())
 
 let thead = document.querySelector(".student-head");
 
@@ -228,67 +231,27 @@ thead.append(tr);
 let tbody = document.querySelector(".student-body");
 
 for (let student of students) {
-	let tr = document.createElement('tr'); 
-	
+    if (student.isAvailable() === true) {
+        let tr = document.createElement('tr'); 
+
         for (let column in student) {
             let td = document.createElement('td');
-
-            if (column == "speciality") {
+            
+            if (column === "speciality") {
                 td.innerHTML = Specs[student[column]]
             } else {
                 td.innerHTML = student[column]
             }
 
-            tr.append(td);   
+            tr.append(td); 
         }
-	
-	tbody.append(tr); 
+        tbody.append(tr); 
+    }
 }
 
 
 // ********************* api.js *********************
 
-function addStudent(student) {
-    let maxId = students[0].id;
-
-    for(let i = 0; i < students.length; i++){
-        if (maxId < students[i].id) {
-          maxId = students[i].id 
-        }
-    }
-
-    students.push (
-        {
-            id: maxId + 1,
-            ...student,
-        }
-    )
-}
-
-function updateStudent(id, student) {
-    
-    for (let i = 0; i < students.length; i++) {
-        const item = students[i];
-
-        if (item.id === id) {
-            students[i] = {
-                ...item,
-                ...student,
-            }
-        }
-    }
-}
-
-function deleteStudent(id) {
-    students = students.filter(function(student) { return student.id !== id })
-}
-
-
-// ********************* utils.js *********************
-
-function outputArray() {
-    console.log("--- список студентов ---")
-    for (let item of students) {
-        console.log(`${item.id}-${item.name}-${item.surname}-${Specs[item.speciality]}-${item.age}`)
-    }
+function deleteStudent(index, students) {
+    students.splice(index, 1);
 }
