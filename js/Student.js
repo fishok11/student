@@ -21,10 +21,6 @@ class Student {
     }
 
     isAvailable() {
-        if (this.available) {
-            return true
-        } else {
-            return false
-        }
+        return this.available
     }
 }

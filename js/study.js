@@ -218,11 +218,13 @@ let student = students[0]
 let tr = document.createElement('tr'); 
 
     for (let key in student) {
-        let th = document.createElement('th');
+        if (key !== "available") {
+            let th = document.createElement('th');
 
-        th.innerHTML = key
-            
-        tr.append(th); 
+            th.innerHTML = key
+                
+            tr.append(th); 
+        }
     }
 
 thead.append(tr); 
@@ -235,15 +237,17 @@ for (let student of students) {
         let tr = document.createElement('tr'); 
 
         for (let column in student) {
-            let td = document.createElement('td');
-            
-            if (column === "speciality") {
-                td.innerHTML = Specs[student[column]]
-            } else {
-                td.innerHTML = student[column]
-            }
+            if (column !== "available") {
+                let td = document.createElement('td');
+                
+                if (column === "speciality") {
+                    td.innerHTML = Specs[student[column]]
+                } else {
+                    td.innerHTML = student[column]
+                }
 
-            tr.append(td); 
+                tr.append(td); 
+            }
         }
         tbody.append(tr); 
     }
