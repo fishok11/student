@@ -3,7 +3,7 @@ function outputArray() {
     for (let item of students) {
         console.log(`${item.id}-${item.name}-${item.surname}-${Specs[item.speciality]}-${item.age}`)
     }
-  }
+}
   
 function generateUUID() { // Public Domain/MIT
 var d = new Date().getTime();//Timestamp

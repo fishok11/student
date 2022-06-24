@@ -194,68 +194,140 @@ students.push(
     new Student({name: "Сева", surname: "Ладыгин", speciality: "25.15", age: 18})
 );
 
-console.log(students[0]);
-students[0].update({age: 21})
-console.log(students[0]);
+
+generateTable(students)
 
 
-/// задание.
-/// вместо физического удаления студента (deleteStudent(1, students);) сделать у студента признак available (активный, учится) - boolean (true/false).
-/// принимаем студента (new) - он сразу учится (available=true). Когда студента отчисляют - available=false
-/// написать метод отчисления студента Student.expel() - применять students[1].expel()
-/// и еще один метод Student.isAvailable(), который будет возвращать true если студент учится (не отчислен)
-/// при выводе таблички не показывать отчисленных студентов, используя метод isAvailable()
+function generateTable(students) {
+    let table = document.querySelector(".student")
 
-/// это заменить на students[1].expel()
-students[1].expel()
-console.log(students);
-console.log(students[1].isAvailable())
+    let thead = document.querySelector("thead")
 
-let thead = document.querySelector(".student-head");
-
-let student = students[0]
-
-let tr = document.createElement('tr'); 
-
-    for (let key in student) {
-        if (key !== "available") {
-            let th = document.createElement('th');
-
-            th.innerHTML = key
-                
-            tr.append(th); 
-        }
+    if (thead) {
+        thead.remove()
     }
 
-thead.append(tr); 
+    thead = document.createElement("thead");
 
+    thead.classList.add("student-head")
 
-let tbody = document.querySelector(".student-body");
+    table.append(thead)
 
-for (let student of students) {
-    if (student.isAvailable() === true) {
-        let tr = document.createElement('tr'); 
+   
 
-        for (let column in student) {
-            if (column !== "available") {
-                let td = document.createElement('td');
-                
-                if (column === "speciality") {
-                    td.innerHTML = Specs[student[column]]
-                } else {
-                    td.innerHTML = student[column]
-                }
+    let student = students[0]
 
-                tr.append(td); 
+    let tr = document.createElement('tr'); 
+
+        for (let key in student) {
+            if (key !== "available") {
+                let th = document.createElement('th');
+
+                th.innerHTML = key
+                    
+                tr.append(th); 
             }
         }
-        tbody.append(tr); 
+
+    let thButton = document.createElement('th');
+
+    tr.append(thButton); 
+    
+    thead.append(tr); 
+
+    let tbody = document.querySelector("tbody")
+
+        if (tbody) {
+            tbody.remove()
+        }
+
+    tbody = document.createElement("tbody");
+
+    tbody.classList.add("student-body")
+
+    table.append(tbody)
+    
+    for (let student of students) {
+        if (student.isAvailable() === true) {
+            let tr = document.createElement('tr'); 
+
+            for (let column in student) {
+                if (column !== "available") {
+                    let td = document.createElement('td');
+                    
+                    if (column === "speciality") {
+                        td.innerHTML = Specs[student[column]]
+                    } else {
+                        td.innerHTML = student[column]
+                    }
+
+                    tr.append(td); 
+                }
+            }
+
+            let buttonUpdate = document.createElement('button'); 
+
+            let tdButton = document.createElement('td'); 
+
+            buttonUpdate.classList.add("button-update")
+
+            buttonUpdate.innerHTML = "Изменить"
+
+            buttonUpdate.onclick = function() {
+                const studentId = student.id;
+                const oneStudent = students.find(student => studentId === student.id)
+                const form = document.querySelector("[name = 'formUpdate']")
+                form.id.value = oneStudent.id
+                form.name.value = oneStudent.name
+                form.surname.value = oneStudent.surname
+                form.speciality.value = oneStudent.speciality
+                form.age.value = oneStudent.age
+            }
+
+            tdButton.append(buttonUpdate); 
+
+            tr.append(tdButton); 
+
+            
+
+            let buttonExpel = document.createElement('button'); 
+
+            buttonExpel.classList.add("button-expel")
+
+            buttonExpel.innerHTML = "Отчислить" 
+
+            buttonExpel.onclick = function() {
+                const studentId = student.id;
+                students.find(student => studentId === student.id).expel()
+                generateTable(students)
+            }
+
+            tdButton.append(buttonExpel); 
+
+            tr.append(tdButton); 
+            
+
+            tbody.append(tr); 
+        }
     }
 }
 
+document.querySelector(".button-add").addEventListener("click", function() {
+    const form = document.querySelector("[name = 'formAdd']")
+    students.push(
+        new Student({id:generateUUID(), name: form.name.value, surname: form.surname.value, speciality: form.speciality.value, age: form.age.value})
+    );
+    generateTable(students)
+});
 
-// ********************* api.js *********************
-
-function deleteStudent(index, students) {
-    students.splice(index, 1);
-}
+document.querySelector(".button-save").addEventListener("click", function() {
+    const form = document.querySelector("[name = 'formUpdate']")
+    const studentId = form.id.value;
+    students.find(student => studentId === student.id).update({
+        name: form.name.value,
+        surname: form.surname.value,
+        speciality: form.speciality.value,
+        age: form.age.value
+    });
+    generateTable(students)
+});
