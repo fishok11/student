@@ -165,10 +165,10 @@ console.log(arrNumber)
 // ********************* database.js *********************
 
 const Specs = {
-    "22.01": "Инженер",
-    "23.15": "Программист",
-    "25.15": "Химик",
-    "23.15": "Биолог",
+    "1": "Инженер",
+    "2": "Программист",
+    "3": "Химик",
+    "4": "Биолог",
 }
 
 
@@ -179,23 +179,50 @@ const Specs = {
 let students = [];
 
 students.push(
-    new Student({name: "Вася", surname: "Иванов", speciality: "22.01", age: 18})
+    new Student({name: "Вася", surname: "Иванов", speciality: "1", age: 18})
 );
 students.push(
-    new Student({name: "Петя", surname: "Тузов", speciality: "23.15", age: 22})
+    new Student({name: "Петя", surname: "Тузов", speciality: "2", age: 22})
 );
 students.push(
-    new Student({name: "Петя", surname: "Соболев", speciality: "22.01", age: 20})
+    new Student({name: "Петя", surname: "Соболев", speciality: "1", age: 20})
 );
 students.push(
-    new Student({name: "Дима", surname: "Тугушев", speciality: "23.15", age: 19})
+    new Student({name: "Дима", surname: "Тугушев", speciality: "3", age: 19})
 );
 students.push(
-    new Student({name: "Сева", surname: "Ладыгин", speciality: "25.15", age: 18})
+    new Student({name: "Сева", surname: "Ладыгин", speciality: "4", age: 18})
 );
 
 
 generateTable(students)
+
+
+
+let selectAdd = document.querySelector(".select-speciality-add");
+
+for (let key in Specs) {             
+    let option = document.createElement("option");
+
+    option.setAttribute("value", key);
+
+    option.innerHTML = Specs[key]
+
+    selectAdd.append(option);
+}
+
+let selectUpdate = document.querySelector(".select-speciality");
+       
+for (let key in Specs) {             
+    let option = document.createElement("option");
+
+    option.setAttribute("value", key);
+
+    option.innerHTML = Specs[key]
+
+    selectUpdate.append(option);
+}
+
 
 
 function generateTable(students) {
@@ -213,27 +240,31 @@ function generateTable(students) {
 
     table.append(thead)
 
-   
+
 
     let student = students[0]
 
-    let tr = document.createElement('tr'); 
+    let tr = document.createElement("tr"); 
 
         for (let key in student) {
             if (key !== "available") {
-                let th = document.createElement('th');
+                let th = document.createElement("th");
 
                 th.innerHTML = key
-                    
+   
                 tr.append(th); 
             }
         }
 
-    let thButton = document.createElement('th');
+    let thButton = document.createElement("th");
+    
+    thButton.innerHTML = "update/expel"
 
     tr.append(thButton); 
-    
+
     thead.append(tr); 
+
+
 
     let tbody = document.querySelector("tbody")
 
@@ -247,27 +278,31 @@ function generateTable(students) {
 
     table.append(tbody)
     
+
+
     for (let student of students) {
         if (student.isAvailable() === true) {
-            let tr = document.createElement('tr'); 
+            let tr = document.createElement("tr"); 
 
             for (let column in student) {
                 if (column !== "available") {
-                    let td = document.createElement('td');
-                    
+                    let td = document.createElement("td");
+
                     if (column === "speciality") {
                         td.innerHTML = Specs[student[column]]
                     } else {
-                        td.innerHTML = student[column]
+                        td.innerHTML = student[column] 
                     }
 
                     tr.append(td); 
                 }
             }
 
-            let buttonUpdate = document.createElement('button'); 
 
-            let tdButton = document.createElement('td'); 
+
+            let buttonUpdate = document.createElement("button"); 
+
+            let tdButton = document.createElement("td"); 
 
             buttonUpdate.classList.add("button-update")
 
@@ -280,7 +315,7 @@ function generateTable(students) {
                 form.id.value = oneStudent.id
                 form.name.value = oneStudent.name
                 form.surname.value = oneStudent.surname
-                form.speciality.value = oneStudent.speciality
+                selectUpdate.value = oneStudent.speciality
                 form.age.value = oneStudent.age
             }
 
@@ -288,9 +323,9 @@ function generateTable(students) {
 
             tr.append(tdButton); 
 
-            
 
-            let buttonExpel = document.createElement('button'); 
+
+            let buttonExpel = document.createElement("button"); 
 
             buttonExpel.classList.add("button-expel")
 
@@ -305,7 +340,8 @@ function generateTable(students) {
             tdButton.append(buttonExpel); 
 
             tr.append(tdButton); 
-            
+
+
 
             tbody.append(tr); 
         }
@@ -315,7 +351,7 @@ function generateTable(students) {
 document.querySelector(".button-add").addEventListener("click", function() {
     const form = document.querySelector("[name = 'formAdd']")
     students.push(
-        new Student({id:generateUUID(), name: form.name.value, surname: form.surname.value, speciality: form.speciality.value, age: form.age.value})
+        new Student({ name: form.name.value, surname: form.surname.value, speciality: selectAdd.value, age: form.age.value})
     );
     generateTable(students)
 });
@@ -323,11 +359,11 @@ document.querySelector(".button-add").addEventListener("click", function() {
 document.querySelector(".button-save").addEventListener("click", function() {
     const form = document.querySelector("[name = 'formUpdate']")
     const studentId = form.id.value;
-    students.find(student => studentId === student.id).update({
+    students.find(student => studentId === student.id).update({     
         name: form.name.value,
         surname: form.surname.value,
-        speciality: form.speciality.value,
-        age: form.age.value
+        speciality: selectUpdate.value,
+        age: form.age.value 
     });
     generateTable(students)
 });
