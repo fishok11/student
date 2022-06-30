@@ -171,7 +171,10 @@ const Specs = {
     "4": "Биолог",
 }
 
-
+const TypeOfTraining = {
+    "1": "Очно",
+    "2": "Заочно",
+}
 
 
 // ********************* main.js *********************
@@ -179,19 +182,19 @@ const Specs = {
 let students = [];
 
 students.push(
-    new Student({name: "Вася", surname: "Иванов", speciality: "1", age: 18})
+    new Student({name: "Вася", surname: "Иванов", speciality: "1", age: 18, training: "1"})
 );
 students.push(
-    new Student({name: "Петя", surname: "Тузов", speciality: "2", age: 22})
+    new Student({name: "Петя", surname: "Тузов", speciality: "2", age: 22, training: "2"})
 );
 students.push(
-    new Student({name: "Петя", surname: "Соболев", speciality: "1", age: 20})
+    new Student({name: "Петя", surname: "Соболев", speciality: "1", age: 20, training: "2"})
 );
 students.push(
-    new Student({name: "Дима", surname: "Тугушев", speciality: "3", age: 19})
+    new Student({name: "Дима", surname: "Тугушев", speciality: "3", age: 19, training: "1"})
 );
 students.push(
-    new Student({name: "Сева", surname: "Ладыгин", speciality: "4", age: 18})
+    new Student({name: "Сева", surname: "Ладыгин", speciality: "4", age: 18, training: "2"})
 );
 
 
@@ -221,6 +224,55 @@ for (let key in Specs) {
     option.innerHTML = Specs[key]
 
     selectUpdate.append(option);
+}
+
+
+let formAdd = document.querySelector("[name = 'formAdd']")
+
+for (let key in TypeOfTraining) {
+    let inputRadio = document.createElement("input");
+
+    let labelRadio = document.createElement("label");
+
+    let br = document.createElement("br");
+
+    inputRadio.setAttribute("value", key);
+
+    inputRadio.setAttribute("type", "radio");
+
+    inputRadio.setAttribute("name", "training");
+
+    labelRadio.innerHTML = TypeOfTraining[key]
+
+    formAdd.append(inputRadio);
+
+    formAdd.append(labelRadio);
+
+    formAdd.append(br);
+}
+
+let formUpdate = document.querySelector("[name = 'formUpdate']")
+
+for (let key in TypeOfTraining) {
+    let inputRadio = document.createElement("input");
+
+    let labelRadio = document.createElement("label");
+
+    let br = document.createElement("br");
+
+    inputRadio.setAttribute("value", key);
+
+    inputRadio.setAttribute("type", "radio");
+
+    inputRadio.setAttribute("name", "training");
+
+    labelRadio.innerHTML = TypeOfTraining[key]
+
+    formUpdate.append(inputRadio);
+
+    formUpdate.append(labelRadio);
+
+    formUpdate.append(br);
 }
 
 
@@ -290,9 +342,12 @@ function generateTable(students) {
 
                     if (column === "speciality") {
                         td.innerHTML = Specs[student[column]]
+                    } else if (column === "training") {
+                        td.innerHTML = TypeOfTraining[student[column]]
                     } else {
                         td.innerHTML = student[column] 
                     }
+
 
                     tr.append(td); 
                 }
@@ -317,6 +372,7 @@ function generateTable(students) {
                 form.surname.value = oneStudent.surname
                 selectUpdate.value = oneStudent.speciality
                 form.age.value = oneStudent.age
+                form.training.value = oneStudent.training
             }
 
             tdButton.append(buttonUpdate); 
@@ -348,22 +404,38 @@ function generateTable(students) {
     }
 }
 
-document.querySelector(".button-add").addEventListener("click", function() {
+document.querySelector(".button-add").addEventListener("click", function(e) {
+    e.preventDefault()
+
     const form = document.querySelector("[name = 'formAdd']")
+
     students.push(
-        new Student({ name: form.name.value, surname: form.surname.value, speciality: selectAdd.value, age: form.age.value})
+        new Student({ 
+            name: form.name.value, 
+            surname: form.surname.value, 
+            speciality: selectAdd.value, 
+            age: form.age.value, training: 
+            form.training.value 
+        })
     );
+
     generateTable(students)
 });
 
-document.querySelector(".button-save").addEventListener("click", function() {
+document.querySelector(".button-save").addEventListener("click", function(e) {
+    e.preventDefault()
+
     const form = document.querySelector("[name = 'formUpdate']")
+
     const studentId = form.id.value;
+
     students.find(student => studentId === student.id).update({     
         name: form.name.value,
         surname: form.surname.value,
         speciality: selectUpdate.value,
-        age: form.age.value 
+        age: form.age.value,
+        training: form.training.value 
     });
+
     generateTable(students)
 });
