@@ -230,15 +230,11 @@ for (let key in Specs) {
 let formAdd = document.querySelector("[name = 'formAdd']")
 
 for (let key in TypeOfTraining) {
-    let inputRadio = document.createElement("input");
+    let inputRadio = document.querySelector(".input-radio-add");
 
-    let labelRadio = document.createElement("label");
-
-    let br = document.createElement("br");
+    let labelRadio = document.querySelector(".label-radio-add");
 
     inputRadio.setAttribute("value", key);
-
-    inputRadio.setAttribute("type", "radio");
 
     inputRadio.setAttribute("name", "training");
 
@@ -247,22 +243,16 @@ for (let key in TypeOfTraining) {
     formAdd.append(inputRadio);
 
     formAdd.append(labelRadio);
-
-    formAdd.append(br);
 }
 
 let formUpdate = document.querySelector("[name = 'formUpdate']")
 
 for (let key in TypeOfTraining) {
-    let inputRadio = document.createElement("input");
+    let inputRadio = document.querySelector(".input-radio-update");
 
-    let labelRadio = document.createElement("label");
-
-    let br = document.createElement("br");
+    let labelRadio = document.querySelector(".label-radio-update");
 
     inputRadio.setAttribute("value", key);
-
-    inputRadio.setAttribute("type", "radio");
 
     inputRadio.setAttribute("name", "training");
 
@@ -271,8 +261,6 @@ for (let key in TypeOfTraining) {
     formUpdate.append(inputRadio);
 
     formUpdate.append(labelRadio);
-
-    formUpdate.append(br);
 }
 
 
