@@ -8,6 +8,7 @@ class Student {
         this.speciality = student.speciality;
         this.age = student.age;
         this.training  = student.training;
+        this.courses = student.courses;
     }
   
     update(studentUpdate) {
@@ -16,6 +17,7 @@ class Student {
         this.speciality = studentUpdate.speciality ?? this.speciality;
         this.age = studentUpdate.age ?? this.age;
         this.training  = studentUpdate.training ?? this.training;
+        this.courses  = studentUpdate.courses ?? this.courses;
     }
 
     expel() {

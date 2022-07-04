@@ -96,3 +96,7 @@ h2 {
 .button-expel {
     margin: 0 5px;
 }
+.label-courses {
+    display: block;
+    margin-top: 20px;
+}

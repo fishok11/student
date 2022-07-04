@@ -1,167 +1,3 @@
-/*let students = ['Петя', 'Вася', 'Коля', 'Саша']
-
-console.log(students)
-
-students.push('Дима')
-
-console.log(students)
-
-students.push('Марат', 'Борис', 'Игорь', 'Виктор', 'Евгений')
-
-console.log(students)
-
-students = students.filter(function(name) { return name !== 'Виктор'})
-
-console.log(students, students.length)
-
-students = students.filter(function(name) { return name !== 'Евгений' && name !== 'Игорь'})
-
-console.log(students, students.length)
-
-let speciality = 'инженер'
-
-let newSpeciality = 'программист'
-
-// students.forEach(name => {
-//     if (name === 'Вася' || name === 'Коля' || name === 'Дима') {
-//         students = students.filter(function(name) { return name !== 'Вася' && name !== 'Коля' && name !== 'Дима'}) 
-//         students.push(`${name}-${newSpeciality}`)
-//     } else {
-//         students = students.filter(function(name) { return name !== 'Петя' && name !== 'Саша' && name !== 'Марат' && name !== 'Борис'})
-//         students.push(`${name}-${speciality}`)
-//     } 
-// });
-
-function diffSpecialityStudents(name) {
-    if (name === 'Вася' || name === 'Коля' || name === 'Дима') {
-        return `${name}-${newSpeciality}`
-    } else {
-        return `${name}-${speciality}`
-    }
-}
-
-students = students.map(diffSpecialityStudents)
-
-console.log(students, students.length)*/
-
-//==========================================================================================================================
-
-/*let speciality = 'инженер'
-
-let newSpeciality = 'программист'
-
-let students = [
-    {name: 'Петя', faculty: speciality},
-    {name: 'Вася', faculty: speciality}, 
-    {name: 'Коля', faculty: speciality},
-    {name: 'Саша', faculty: speciality},
-]
-
-console.log(students)
-
-students.push({name: 'Дима', faculty: speciality})
-
-console.log(students)
-
-students.push(
-    {name: 'Марат', faculty: speciality}, 
-    {name: 'Борис', faculty: speciality}, 
-    {name: 'Игорь', faculty: speciality}, 
-    {name: 'Виктор', faculty: speciality}, 
-    {name: 'Евгений', faculty: speciality}
-)
-
-console.log(students)
-
-students.push()
-
-console.log(students)
-
-students = students.filter(function(item) { return item.name !== 'Виктор'})
-
-console.log(students)
-
-students = students.filter(function(item) { return item.name !== 'Евгений' && item.name !== 'Игорь'})
-
-console.log(students)
-
-students = students.map(function (item){ 
-    if (item.name === 'Вася' || item.name === 'Коля' || item.name === 'Дима') {
-        return {name: item.name , faculty: newSpeciality}
-    } else {
-        return {...item, faculty: speciality}
-    }
-});
-
-console.log(students)
-
-students.push(
-    {name: 'Сергей', faculty: speciality}, 
-    {name: 'Генадий', faculty: speciality}, 
-)
-
-console.log(students)
-
-students = students.map(function (item){ 
-    if (item.name === 'Сергей') {
-        return {name: item.name, faculty: newSpeciality}
-    } else {
-        return item
-    }
-});
-
-console.log(students)
-
-students = students.map(function (item){ 
-    if (item.name === 'Генадий') {
-        return {name: item.name, faculty: newSpeciality}
-    } else {
-        return item
-    }
-});
-
-console.log(students)*/
-
-//========================================================================================================================
-
-/*
-let arrNumber = [1, 2, 3, 4, 5] 
-
-arrNumber = arrNumber.map(item => (item === 5) ? 0 : item)
-
-const number = arrNumber.indexOf(5)
-
-arrNumber[number] = 0
-
-console.log(arrNumber)
-*/
-
-/*
-let arrNumber = [1, 2, 3, 4, 5, 5, 5]
-
-// for (let i = 0; i < arrNumber.length; i++) {
-//     if (arrNumber[i] === 5) {
-//       arrNumber[i] = 0;
-//     } else {
-//         arrNumber[i]
-//     }
-// }
-
-console.log(arrNumber)
-
-arrNumber.forEach(function(item, index, array) {
-    if (item === 5) {
-        array[index] = 0
-    }
-});
-
-console.log(arrNumber)
-*/
-
-//================================================================================================
-
-
-
 // ********************* database.js *********************
 
 const Specs = {
@@ -176,25 +12,30 @@ const TypeOfTraining = {
     "2": "Заочно",
 }
 
+const Courses = {
+    "1": "Математика",
+    "2": "Физика",
+    "3": "Программирование"
+}
 
 // ********************* main.js *********************
 
 let students = [];
 
 students.push(
-    new Student({name: "Вася", surname: "Иванов", speciality: "1", age: 18, training: "1"})
+    new Student({name: "Вася", surname: "Иванов", speciality: "1", age: 18, training: "1", courses: ["2"]})
 );
 students.push(
-    new Student({name: "Петя", surname: "Тузов", speciality: "2", age: 22, training: "2"})
+    new Student({name: "Петя", surname: "Тузов", speciality: "2", age: 22, training: "2", courses: ["1", "2"]})
 );
 students.push(
-    new Student({name: "Петя", surname: "Соболев", speciality: "1", age: 20, training: "2"})
+    new Student({name: "Петя", surname: "Соболев", speciality: "1", age: 20, training: "2", courses: ["1", "2", "3"]})
 );
 students.push(
-    new Student({name: "Дима", surname: "Тугушев", speciality: "3", age: 19, training: "1"})
+    new Student({name: "Дима", surname: "Тугушев", speciality: "3", age: 19, training: "1", courses: ["1", "3"]})
 );
 students.push(
-    new Student({name: "Сева", surname: "Ладыгин", speciality: "4", age: 18, training: "2"})
+    new Student({name: "Сева", surname: "Ладыгин", speciality: "4", age: 18, training: "2", courses: ["1", "2"]})
 );
 
 
@@ -202,7 +43,7 @@ generateTable(students)
 
 
 
-let selectAdd = document.querySelector(".select-speciality-add");
+const selectAdd = document.querySelector(".select-speciality-add");
 
 for (let key in Specs) {             
     let option = document.createElement("option");
@@ -214,7 +55,7 @@ for (let key in Specs) {
     selectAdd.append(option);
 }
 
-let selectUpdate = document.querySelector(".select-speciality");
+const selectUpdate = document.querySelector(".select-speciality");
        
 for (let key in Specs) {             
     let option = document.createElement("option");
@@ -224,43 +65,6 @@ for (let key in Specs) {
     option.innerHTML = Specs[key]
 
     selectUpdate.append(option);
-}
-
-
-let formAdd = document.querySelector("[name = 'formAdd']")
-
-for (let key in TypeOfTraining) {
-    let inputRadio = document.querySelector(".input-radio-add");
-
-    let labelRadio = document.querySelector(".label-radio-add");
-
-    inputRadio.setAttribute("value", key);
-
-    inputRadio.setAttribute("name", "training");
-
-    labelRadio.innerHTML = TypeOfTraining[key]
-
-    formAdd.append(inputRadio);
-
-    formAdd.append(labelRadio);
-}
-
-let formUpdate = document.querySelector("[name = 'formUpdate']")
-
-for (let key in TypeOfTraining) {
-    let inputRadio = document.querySelector(".input-radio-update");
-
-    let labelRadio = document.querySelector(".label-radio-update");
-
-    inputRadio.setAttribute("value", key);
-
-    inputRadio.setAttribute("name", "training");
-
-    labelRadio.innerHTML = TypeOfTraining[key]
-
-    formUpdate.append(inputRadio);
-
-    formUpdate.append(labelRadio);
 }
 
 
@@ -332,10 +136,13 @@ function generateTable(students) {
                         td.innerHTML = Specs[student[column]]
                     } else if (column === "training") {
                         td.innerHTML = TypeOfTraining[student[column]]
+                    } else
+                     if (column === "courses") {           
+                        const arr = student[column]       
+                        td.innerHTML = arr.map(item => " " + Courses[item]);               
                     } else {
                         td.innerHTML = student[column] 
                     }
-
 
                     tr.append(td); 
                 }
@@ -355,12 +162,19 @@ function generateTable(students) {
                 const studentId = student.id;
                 const oneStudent = students.find(student => studentId === student.id)
                 const form = document.querySelector("[name = 'formUpdate']")
+
                 form.id.value = oneStudent.id
                 form.name.value = oneStudent.name
                 form.surname.value = oneStudent.surname
                 selectUpdate.value = oneStudent.speciality
                 form.age.value = oneStudent.age
                 form.training.value = oneStudent.training
+                document.querySelectorAll(".input-checkbox-update").forEach(checkbox => {
+                    checkbox.checked = false;
+                });
+                oneStudent.courses.forEach(course => {
+                    document.getElementById(course + "-checkbox-update").checked = true;
+                });
             }
 
             tdButton.append(buttonUpdate); 
@@ -397,13 +211,18 @@ document.querySelector(".button-add").addEventListener("click", function(e) {
 
     const form = document.querySelector("[name = 'formAdd']")
 
+    let checkboxes = document.querySelectorAll('.input-checkbox-add:checked');
+    let arr = [];
+    checkboxes.forEach((checkbox) => {arr.push(checkbox.value)})
+    
     students.push(
         new Student({ 
             name: form.name.value, 
             surname: form.surname.value, 
             speciality: selectAdd.value, 
-            age: form.age.value, training: 
-            form.training.value 
+            age: form.age.value, 
+            training: form.training.value,
+            courses: arr,
         })
     );
 
@@ -414,15 +233,21 @@ document.querySelector(".button-save").addEventListener("click", function(e) {
     e.preventDefault()
 
     const form = document.querySelector("[name = 'formUpdate']")
-
     const studentId = form.id.value;
+
+    let checkboxes = document.querySelectorAll('.input-checkbox-update:checked');
+    let arr = [];
+    checkboxes.forEach((checkbox) => {
+        arr.push(checkbox.value)
+    })
 
     students.find(student => studentId === student.id).update({     
         name: form.name.value,
         surname: form.surname.value,
         speciality: selectUpdate.value,
         age: form.age.value,
-        training: form.training.value 
+        training: form.training.value,
+        courses: arr,
     });
 
     generateTable(students)
