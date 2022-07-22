@@ -1,0 +1,52 @@
+{
+  "students": [
+    {
+      "id": 1,
+      "name": "Витя",
+      "surname": "Лебедев",
+      "speciality": "1",
+      "age": "20",
+      "training": "2",
+      "courses": [
+        "2",
+        "3"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Вася",
+      "surname": "Тугушев",
+      "speciality": "1",
+      "age": "20",
+      "training": "1",
+      "courses": [
+        "1",
+        "2",
+        "3"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Петя",
+      "surname": "Иванов",
+      "speciality": "1",
+      "age": "19",
+      "training": "2",
+      "courses": [
+        "3"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Дима",
+      "surname": "Соболев",
+      "speciality": "1",
+      "age": "19",
+      "training": "2",
+      "courses": [
+        "2",
+        "3"
+      ]
+    }
+  ]
+}
