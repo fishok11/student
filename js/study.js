@@ -82,6 +82,18 @@ function generateTable() {
 
     table.append(thead)
 
+    let tbody = document.querySelector("tbody")
+
+    if (tbody) {
+        tbody.remove()
+    }
+
+    tbody = document.createElement("tbody");
+
+    tbody.classList.add("student-body")
+
+    table.append(tbody)
+
     fetch("http://localhost:3000/students")
         .then(response => response.json())
         .then((data) => {
@@ -107,20 +119,7 @@ function generateTable() {
         
             thead.append(tr); 
             
-
-            let tbody = document.querySelector("tbody")
-
-            if (tbody) {
-                tbody.remove()
-            }
-        
-            tbody = document.createElement("tbody");
-        
-            tbody.classList.add("student-body")
-        
-            table.append(tbody)
             
-        
         
             for (let student of data) {
                 
@@ -227,14 +226,15 @@ document.querySelector(".button-add").addEventListener("click", function(e) {
         courses: arr,
     }
 
-
+    
     fetch('http://localhost:3000/students', {
         method: 'POST',
         headers: {
         'Content-Type': 'application/json;charset=utf-8'
         },
         body: JSON.stringify(user)
-    });
+    })
+    .then(alert("Студент добавлен!"))
 });
 
 document.querySelector(".button-save").addEventListener("click", function(e) {
@@ -265,5 +265,6 @@ document.querySelector(".button-save").addEventListener("click", function(e) {
         'Content-Type': 'application/json;charset=utf-8'
         },
         body: JSON.stringify(user)
-    });
+    })
+    .then(alert("Студент изменен!"))
 });

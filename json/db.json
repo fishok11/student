@@ -16,7 +16,7 @@
       "id": 2,
       "name": "Вася",
       "surname": "Тугушев",
-      "speciality": "1",
+      "speciality": "2",
       "age": "20",
       "training": "1",
       "courses": [
@@ -27,12 +27,13 @@
     },
     {
       "id": 4,
-      "name": "Петя",
+      "name": "Саша",
       "surname": "Иванов",
       "speciality": "1",
-      "age": "19",
-      "training": "2",
+      "age": "18",
+      "training": "1",
       "courses": [
+        "1",
         "3"
       ]
     },
@@ -40,11 +41,23 @@
       "id": 5,
       "name": "Дима",
       "surname": "Соболев",
-      "speciality": "1",
+      "speciality": "3",
       "age": "19",
       "training": "2",
       "courses": [
         "2",
+        "3"
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Сева",
+      "surname": "Ладыгин",
+      "speciality": "4",
+      "age": "19",
+      "training": "1",
+      "courses": [
+        "1",
         "3"
       ]
     }
