@@ -1,8 +1,6 @@
 class Student {
     constructor(student) {
-        this.id = generateUUID();
-        this.available = true;  
-
+        this.id = student.id;
         this.name = student.name;
         this.surname = student.surname;
         this.speciality = student.speciality;
@@ -11,20 +9,47 @@ class Student {
         this.courses = student.courses;
     }
   
-    update(studentUpdate) {
-        this.name = studentUpdate.name ?? this.name;
-        this.surname = studentUpdate.surname ?? this.surname;
-        this.speciality = studentUpdate.speciality ?? this.speciality;
-        this.age = studentUpdate.age ?? this.age;
-        this.training  = studentUpdate.training ?? this.training;
-        this.courses  = studentUpdate.courses ?? this.courses;
+    async create() {
+        const response = await fetch('http://localhost:3000/students', {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(this)
+        })
+        
+        if (response.status < 300) {
+            return true
+        } else if (response.status >= 300) {
+            return false
+        }
     }
 
-    expel() {
-        this.available = false; 
+    async update() {
+        const response = await fetch('http://localhost:3000/students/' + this.id, {
+            method: 'PUT',
+            headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(this)
+        })
+
+        if (response.status < 300) {
+            return true
+        } else if (response.status >= 300) {
+            return false
+        }
     }
 
-    isAvailable() {
-        return this.available
+    async delete() {
+        const response = await fetch( `http://localhost:3000/students/` + this.id, {
+            method: 'DELETE',
+        })
+
+        if (response.status < 300) {
+            return true
+        } else if (response.status >= 300) {
+            return false
+        }
     }
 }

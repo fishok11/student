@@ -5,11 +5,10 @@
       "name": "Витя",
       "surname": "Лебедев",
       "speciality": "1",
-      "age": "20",
+      "age": "23",
       "training": "2",
       "courses": [
-        "2",
-        "3"
+        "2"
       ]
     },
     {
@@ -31,10 +30,10 @@
       "surname": "Иванов",
       "speciality": "1",
       "age": "18",
-      "training": "1",
+      "training": "2",
       "courses": [
         "1",
-        "3"
+        "2"
       ]
     },
     {
@@ -43,7 +42,7 @@
       "surname": "Соболев",
       "speciality": "3",
       "age": "19",
-      "training": "2",
+      "training": "1",
       "courses": [
         "2",
         "3"
@@ -54,7 +53,7 @@
       "name": "Сева",
       "surname": "Ладыгин",
       "speciality": "4",
-      "age": "19",
+      "age": "21",
       "training": "1",
       "courses": [
         "1",

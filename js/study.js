@@ -18,28 +18,7 @@ const Courses = {
     "3": "Программирование"
 }
 // ********************* main.js *********************
-
-// let students = [];
-
-// students.push(
-//     new Student({name: "Вася", surname: "Иванов", speciality: "1", age: 18, training: "1", courses: ["2"]})
-// );
-// students.push(
-//     new Student({name: "Петя", surname: "Тузов", speciality: "2", age: 22, training: "2", courses: ["1", "2"]})
-// );
-// students.push(
-//     new Student({name: "Петя", surname: "Соболев", speciality: "1", age: 20, training: "2", courses: ["1", "2", "3"]})
-// );
-// students.push(
-//     new Student({name: "Дима", surname: "Тугушев", speciality: "3", age: 19, training: "1", courses: ["1", "3"]})
-// );
-// students.push(
-//     new Student({name: "Сева", surname: "Ладыгин", speciality: "4", age: 18, training: "2", courses: ["1", "2"]})
-// );
-
-
 generateTable()
-
 
 
 const selectAdd = document.querySelector(".select-speciality-add");
@@ -186,13 +165,18 @@ function generateTable() {
 
                 buttonExpel.innerHTML = "Отчислить" 
 
-                buttonExpel.onclick = function() {
-                    const studentId = student.id;
+                buttonExpel.onclick = async function() {
+                    student = new Student({
+                        id: student.id,
+                    })
 
-                    fetch( `http://localhost:3000/students/` + studentId, {
-                        method: 'DELETE',
-                    });
+                    const response = await student.delete();
 
+                    if (response) {
+                        alert("Студент удален!");
+                    } else {
+                        alert("Ошибка!!!")
+                    }
                 }
 
                 tdButton.append(buttonExpel); 
@@ -201,22 +185,20 @@ function generateTable() {
                 
 
                 tbody.append(tr); 
-            
-        }
+            }
     });
 }
 
 document.querySelector(".button-add").addEventListener("click", function(e) {
     e.preventDefault()
 
-
     const form = document.querySelector("[name = 'formAdd']")
 
-    let checkboxes = document.querySelectorAll('.input-checkbox-add:checked');
-    let arr = [];
+    const checkboxes = document.querySelectorAll('.input-checkbox-add:checked');
+    const arr = [];
     checkboxes.forEach((checkbox) => {arr.push(checkbox.value)})
     
-    let user = { 
+    const student = new Student({ 
         id:"",
         name: form.name.value, 
         surname: form.surname.value, 
@@ -224,18 +206,22 @@ document.querySelector(".button-add").addEventListener("click", function(e) {
         age: form.age.value, 
         training: form.training.value,
         courses: arr,
-    }
-
-    
-    fetch('http://localhost:3000/students', {
-        method: 'POST',
-        headers: {
-        'Content-Type': 'application/json;charset=utf-8'
-        },
-        body: JSON.stringify(user)
     })
-    .then(alert("Студент добавлен!"))
+
+    async function studentCreate() {
+        const response = await student.create();
+           
+        if (response) {
+            alert("Студент добавлен!");
+        } else {
+            alert("Ошибка!!!")
+        }
+    }
+    
+    studentCreate()
 });
+
+
 
 document.querySelector(".button-save").addEventListener("click", function(e) {
     e.preventDefault()
@@ -243,28 +229,31 @@ document.querySelector(".button-save").addEventListener("click", function(e) {
     const form = document.querySelector("[name = 'formUpdate']")
     const studentId = form.id.value;
 
-    let checkboxes = document.querySelectorAll('.input-checkbox-update:checked');
-    let arr = [];
+    const checkboxes = document.querySelectorAll('.input-checkbox-update:checked');
+    const arr = [];
     checkboxes.forEach((checkbox) => {
         arr.push(checkbox.value)
     })
 
-    let user = { 
-        id:"",
+    const student = new Student({ 
+        id: studentId,
         name: form.name.value, 
         surname: form.surname.value, 
-        speciality: selectAdd.value, 
+        speciality: selectUpdate.value, 
         age: form.age.value, 
         training: form.training.value,
         courses: arr,
-    }
-
-    fetch('http://localhost:3000/students/' + studentId, {
-        method: 'PUT',
-        headers: {
-        'Content-Type': 'application/json;charset=utf-8'
-        },
-        body: JSON.stringify(user)
     })
-    .then(alert("Студент изменен!"))
+    
+    async function studentUpdate() {
+        const response = await student.update();
+           
+        if (response) {
+            alert("Студент изменен!");
+        } else {
+            alert("Ошибка!!!")
+        }
+    }
+    
+    studentUpdate()
 });
