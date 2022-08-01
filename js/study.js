@@ -46,7 +46,7 @@ for (let key in Specs) {
 }
 
 
-function generateTable() {
+async function generateTable() {
     let table = document.querySelector(".student")
 
     let thead = document.querySelector("thead")
@@ -73,120 +73,122 @@ function generateTable() {
 
     table.append(tbody)
 
-    fetch("http://localhost:3000/students")
-        .then(response => response.json())
-        .then((data) => {
-            let student = data[0]
 
-            let tr = document.createElement("tr"); 
-        
-                for (let key in student) {
-                    if (key !== "available") {
-                        let th = document.createElement("th");
-        
-                        th.innerHTML = key
-           
-                        tr.append(th); 
-                    }
-                }
-        
-            let thButton = document.createElement("th");
-            
-            thButton.innerHTML = "update/expel"
-        
-            tr.append(thButton); 
-        
-            thead.append(tr); 
-            
-            
-        
-            for (let student of data) {
-                
-                let tr = document.createElement("tr"); 
+    
+    const response = await fetch("http://localhost:3000/students")
 
-                for (let column in student) {
-                    if (column !== "available") {
-                        let td = document.createElement("td");
+    const data = await response.json()
 
-                        if (column === "speciality") {
-                            td.innerHTML = Specs[student[column]]
-                        } else if (column === "training") {
-                            td.innerHTML = TypeOfTraining[student[column]]
-                        } else
-                            if (column === "courses") {           
-                            const arr = student[column]       
-                            td.innerHTML = arr.map(item => " " + Courses[item]);               
-                        } else {
-                            td.innerHTML = student[column] 
-                        }
+    let oneStudent = data[0]
 
-                        tr.append(td); 
-                    }
-                }
+    let tr = document.createElement("tr"); 
 
+        for (let key in oneStudent) {
+            if (key !== "available") {
+                let th = document.createElement("th");
 
-
-                let buttonUpdate = document.createElement("button"); 
-
-                let tdButton = document.createElement("td"); 
-
-                buttonUpdate.classList.add("button-update")
-
-                buttonUpdate.innerHTML = "Изменить"
-
-                buttonUpdate.onclick = function() {
-                    const studentId = student.id;
-                    const oneStudent = data.find(student => studentId === student.id)
-                    const form = document.querySelector("[name = 'formUpdate']")
-
-                    form.id.value = oneStudent.id
-                    form.name.value = oneStudent.name
-                    form.surname.value = oneStudent.surname
-                    selectUpdate.value = oneStudent.speciality
-                    form.age.value = oneStudent.age
-                    form.training.value = oneStudent.training
-                    document.querySelectorAll(".input-checkbox-update").forEach(checkbox => {
-                        checkbox.checked = false;
-                    });
-                    oneStudent.courses.forEach(course => {
-                        document.getElementById(course + "-checkbox-update").checked = true;
-                    });
-                }
-
-                tdButton.append(buttonUpdate); 
-
-                tr.append(tdButton); 
-
-
-
-                let buttonExpel = document.createElement("button"); 
-
-                buttonExpel.classList.add("button-expel")
-
-                buttonExpel.innerHTML = "Отчислить" 
-
-                buttonExpel.onclick = async function() {
-                    student = new Student({
-                        id: student.id,
-                    })
-
-                    const response = await student.delete();
-
-                    if (response) {
-                        alert("Студент удален!");
-                    } else {
-                        alert("Ошибка!!!")
-                    }
-                }
-
-                tdButton.append(buttonExpel); 
-
-                tr.append(tdButton); 
-                
-
-                tbody.append(tr); 
+                th.innerHTML = key
+    
+                tr.append(th); 
             }
-    });
+        }
+
+    let thButton = document.createElement("th");
+    
+    thButton.innerHTML = "update/expel"
+
+    tr.append(thButton); 
+
+    thead.append(tr); 
+    
+    
+
+    for (let student of data) {
+        
+        let tr = document.createElement("tr"); 
+
+        for (let column in student) {
+            if (column !== "available") {
+                let td = document.createElement("td");
+
+                if (column === "speciality") {
+                    td.innerHTML = Specs[student[column]]
+                } else if (column === "training") {
+                    td.innerHTML = TypeOfTraining[student[column]]
+                } else
+                    if (column === "courses") {           
+                    const arr = student[column]       
+                    td.innerHTML = arr.map(item => " " + Courses[item]);               
+                } else {
+                    td.innerHTML = student[column] 
+                }
+
+                tr.append(td); 
+            }
+        }
+
+
+
+        let buttonUpdate = document.createElement("button"); 
+
+        let tdButton = document.createElement("td"); 
+
+        buttonUpdate.classList.add("button-update")
+
+        buttonUpdate.innerHTML = "Изменить"
+
+        buttonUpdate.onclick = function() {
+            const studentId = student.id;
+            const oneStudent = data.find(student => studentId === student.id)
+            const form = document.querySelector("[name = 'formUpdate']")
+
+            form.id.value = oneStudent.id
+            form.name.value = oneStudent.name
+            form.surname.value = oneStudent.surname
+            selectUpdate.value = oneStudent.speciality
+            form.age.value = oneStudent.age
+            form.training.value = oneStudent.training
+            document.querySelectorAll(".input-checkbox-update").forEach(checkbox => {
+                checkbox.checked = false;
+            });
+            oneStudent.courses.forEach(course => {
+                document.getElementById(course + "-checkbox-update").checked = true;
+            });
+        }
+
+        tdButton.append(buttonUpdate); 
+
+        tr.append(tdButton); 
+
+
+
+        let buttonExpel = document.createElement("button"); 
+
+        buttonExpel.classList.add("button-expel")
+
+        buttonExpel.innerHTML = "Отчислить" 
+
+        buttonExpel.onclick = async function() {
+            student = new Student({
+                id: student.id,
+            })
+
+            const response = await student.delete();
+
+            if (response) {
+                alert("Студент удален!");
+            } else {
+                alert("Ошибка!!!")
+            }
+        }
+
+        tdButton.append(buttonExpel); 
+
+        tr.append(tdButton); 
+        
+
+        tbody.append(tr); 
+    }
 }
 
 document.querySelector(".button-add").addEventListener("click", function(e) {
